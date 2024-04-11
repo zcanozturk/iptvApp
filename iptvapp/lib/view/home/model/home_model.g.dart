@@ -7,15 +7,19 @@ part of 'home_model.dart';
 // **************************************************************************
 
 HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
-      userId: json['userId'] as int?,
       id: json['id'] as int?,
-      title: json['title'] as String?,
-      body: json['body'] as String?,
+      customername: json['customername'] as String?,
+      customersurname: json['customersurname'] as String?,
+      customerip: json['customerip'] as String?,
+      tracks: (json['tracks'] as List<dynamic>?)
+          ?.map((e) => Tracks.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$HomeModelToJson(HomeModel instance) => <String, dynamic>{
-      'userId': instance.userId,
       'id': instance.id,
-      'title': instance.title,
-      'body': instance.body,
+      'customername': instance.customername,
+      'customersurname': instance.customersurname,
+      'customerip': instance.customerip,
+      'tracks': instance.tracks,
     };

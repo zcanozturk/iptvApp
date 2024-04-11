@@ -8,15 +8,14 @@ import '../viewmodel/home_view_model.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
-  final ctrl = Get.put(
-      HomeViewModel());
+  final ctrl = Get.put(HomeViewModel());
   initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // executes after build
-    ctrl.getHomeItems();
+      ctrl.getHomeItems();
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     // ctrl.getHomeItems();
@@ -41,9 +40,7 @@ class HomeView extends StatelessWidget {
               onPressed: () {
                 ctrl.counter.value = 0;
                 Get.snackbar('DELETED', 'You have cleared counter !',
-                colorText: Colors.white,
-                backgroundColor:Colors.green
-                );
+                    colorText: Colors.white, backgroundColor: Colors.green);
               },
               child: Icon(Icons.clear))
         ],
@@ -70,11 +67,12 @@ class HomeView extends StatelessWidget {
 
   buildListBuilder() {
     var refreshKey = GlobalKey<RefreshIndicatorState>();
-    return Container( // if there is another thing above or below list yo should make this expanded to fit .
+    return Container(
+        // if there is another thing above or below list yo should make this expanded to fit .
         color: Colors.black,
         alignment: Alignment.center,
         height: Get.height,
-        child: ctrl.homeList.isEmpty
+        child: ctrl.joblist.isEmpty
             ? RefreshIndicator(
                 onRefresh: () async {
                   await ctrl.getHomeItems();
@@ -104,9 +102,9 @@ class HomeView extends StatelessWidget {
                   thickness: Get.width * 0.02,
                   child: ListView.builder(
                       physics: BouncingScrollPhysics(),
-                      itemCount: ctrl.homeList.length,
+                      itemCount: ctrl.joblist.length,
                       itemBuilder: (context, index) {
-                        var model = ctrl.homeList[index];
+                        var model = ctrl.joblist[index];
                         return getCardListWidget(context, model);
                       }),
                 ),
@@ -121,16 +119,14 @@ class HomeView extends StatelessWidget {
             onTap: () async {
               //Get.to(SomeView());
             },
-            isThreeLine: true,
             leading: Icon(
               Icons.wb_sunny,
               color: Colors.blue,
             ),
             title: AutoSizeText(
-              model.title ?? '',
+              model.customerip ?? '',
               maxLines: 2,
             ),
-            subtitle: Text(model.body ?? ''),
           ),
         ],
       ),
